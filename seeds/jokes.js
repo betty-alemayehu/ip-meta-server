@@ -1,4 +1,58 @@
-export const jokes = [
+/**
+ * @param { import("knex").Knex } knex
+ * @returns { Promise<void> }
+ */
+
+export async function seed(knex) {
+  // Deletes ALL existing entries
+  await knex("jokes").del();
+  await knex("hobbies").del();
+  await knex("ages").del();
+  await knex("moods").del();
+  await knex("humor").del();
+
+  // Insert data into reference tables
+  const [sports, arts, tech, travel, cooking] = await knex("hobbies")
+    .insert([
+      { hobby: "Sports & Fitness" },
+      { hobby: "Arts & Crafts" },
+      { hobby: "Technology & Gaming" },
+      { hobby: "Travel & Adventure" },
+      { hobby: "Cooking & Food" },
+    ])
+    .returning("id");
+
+  const [age18_25, age26_35, age36_45, age46_60, age60Plus] = await knex("ages")
+    .insert([
+      { age: "18-25" },
+      { age: "26-35" },
+      { age: "36-45" },
+      { age: "46-60" },
+      { age: "60+" },
+    ])
+    .returning("id");
+
+  const [happy, relaxed, energetic, stressed, reflective] = await knex("moods")
+    .insert([
+      { mood: "Happy" },
+      { mood: "Relaxed" },
+      { mood: "Energetic" },
+      { mood: "Stressed" },
+      { mood: "Reflective" },
+    ])
+    .returning("id");
+
+  const [sarcastic, wholesome, punBased, witty, slapstick] = await knex("humor")
+    .insert([
+      { humor: "Sarcastic" },
+      { humor: "Wholesome" },
+      { humor: "Pun-based" },
+      { humor: "Witty/Intellectual" },
+      { humor: "Slapstick" },
+    ])
+    .returning("id");
+
+  await knex("jokes").insert([
     {
       hobby: "Sports & Fitness",
       age: "18-25",
@@ -174,5 +228,5 @@ export const jokes = [
       type: "Slapstick",
       joke: "I tried flipping a pancake but ended up flipping the whole pan instead.",
     },
-  ];
-  
+  ]);
+}
