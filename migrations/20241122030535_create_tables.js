@@ -60,9 +60,9 @@ export async function up(knex) {
  */
 export async function down(knex) {
   return knex.schema
-    .dropTable("jokes") // Drop the dependent table first
-    .dropTable("hobbies")
-    .dropTable("moods")
-    .dropTable("ages")
-    .dropTable("humor"); // Consistent spelling
+    .dropTableIfExists("jokes") // Drop the dependent table first
+    .dropTableIfExists("hobbies")
+    .dropTableIfExists("moods")
+    .dropTableIfExists("ages")
+    .dropTableIfExists("humor"); // Consistent spelling
 }
