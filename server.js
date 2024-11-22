@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import jokeRoute from "./Routes/routes.js";
 
 dotenv.config(); // Load environment variables from .env
 
@@ -15,6 +16,8 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.send("Server is running!");
 });
+
+app.use("/jokes", jokeRoute);
 
 // Start server
 app.listen(PORT, () => {
