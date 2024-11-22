@@ -9,7 +9,8 @@
     "dev": "node --watch server.js",
     "migrate:make": "npx knex --knexfile knexfile.js migrate:make",
     "migrate:latest": "npx knex --knexfile knexfile.js migrate:latest",
-    "migrate:rollback": "npx knex --knexfile knexfile.js migrate:rollback"
+    "migrate:rollback": "npx knex --knexfile knexfile.js migrate:rollback",
+    "seed": "npx knex seed:run"
   },
   "keywords": [],
   "author": "",
